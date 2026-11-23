@@ -1,6 +1,7 @@
 import * as esbuild from "esbuild";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { htmlPlugin } from "./plugins/html.js";
 import { postcssPlugin } from "./plugins/postcss.js";
 import { watchLogger } from "./plugins/logger.js";
 
@@ -21,7 +22,11 @@ const options: esbuild.BuildOptions = {
   platform: "browser",
   sourcemap: isWatchMode,
   minify: !isWatchMode,
+  metafile: true,
   plugins: [
+    htmlPlugin({
+      template: "templates/index.html",
+    }),
     postcssPlugin,
     watchLogger,
   ],
