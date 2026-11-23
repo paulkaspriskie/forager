@@ -1,1 +1,2 @@
-pub mod technical;
+pub mod fundamentals;
+pub mod market;
