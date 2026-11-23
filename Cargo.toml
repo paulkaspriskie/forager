@@ -2,4 +2,5 @@
 resolver = "3"
 members = [
     "apps/api",
+    "crates/fmp-client"
 ]
