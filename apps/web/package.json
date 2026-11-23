@@ -2,10 +2,11 @@
   "name": "forager-web-app",
   "version": "0.1.0",
   "description": "",
-  "main": "src/js/index.js",
+  "main": "src/index.ts",
+  "type": "module",
   "scripts": {
-    "build": "node scripts/build.mjs",
-    "build:watch": "node scripts/build.mjs --watch"
+    "build": "tsx scripts/build.ts",
+    "build:watch": "tsx scripts/build.ts --watch"
   },
   "author": "",
   "license": "ISC",
@@ -14,10 +15,12 @@
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
+    "@types/node": "^26.6.6",
     "autoprefixer": "^10.7.0",
     "esbuild": "^0.28.2",
     "postcss": "^8.5.33",
     "postcss-nesting": "^14.0.3",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   }
 }

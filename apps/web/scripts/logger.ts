@@ -1,4 +1,6 @@
-export const watchLogger = {
+import type { Plugin } from "esbuild";
+
+export const watchLogger: Plugin = {
   name: "watch-logger",
 
   setup(build) {
