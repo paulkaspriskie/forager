@@ -1,1 +1,0 @@
-console.log('forager-web-app');
