@@ -1,7 +1,7 @@
 import * as esbuild from "esbuild";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { watchLogger } from "./logger.js";
+import { watchLogger } from "./plugins/logger.js";
 
 const rootDir = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
