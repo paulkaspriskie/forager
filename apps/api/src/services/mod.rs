@@ -1,1 +1,1 @@
-pub mod eodhd;
+pub mod technical;

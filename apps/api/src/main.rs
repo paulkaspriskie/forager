@@ -11,7 +11,7 @@ use serde::Deserialize;
 use serde_json::{json, Value};
 use std::env;
 
-use services::eodhd::EodhdClient;
+use services::technical::EodhdClient;
 
 
 /// Query parameters accepted by the historical market data endpoint.
