@@ -2,15 +2,18 @@
   "name": "forager",
   "version": "0.1.0",
   "description": "",
-  "main": "apps/web/index.js",
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build -w forager-web-app",
+    "start": "npm run build:watch -w forager-web-app"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/paulkaspriskie/forager.git"
   },
-  "author": "",
+  "author": "Paul Kaspriskie",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/paulkaspriskie/forager/issues"
