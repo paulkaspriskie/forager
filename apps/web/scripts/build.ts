@@ -20,7 +20,7 @@ let reload = () => {};
 
 const options: esbuild.BuildOptions = {
   absWorkingDir: rootDir,
-  entryPoints: ["src/index.ts"],
+  entryPoints: ["src/index.tsx"],
   outdir: outputDir,
   bundle: true,
   format: "esm",
