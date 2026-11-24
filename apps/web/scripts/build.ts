@@ -11,7 +11,9 @@ const rootDir = path.resolve(
 );
 
 const outputDir = path.resolve(rootDir, "../..", "dist");
+
 const isWatchMode = process.argv.includes("--watch");
+const isServeMode = process.argv.includes("--serve");
 
 const options: esbuild.BuildOptions = {
   absWorkingDir: rootDir,
@@ -33,7 +35,22 @@ const options: esbuild.BuildOptions = {
 };
 
 async function build() {
-  if (isWatchMode) {
+  if (isServeMode) {
+    const ctx = await esbuild.context(options);
+
+    await ctx.watch();
+
+    const server = await ctx.serve({
+      host: "127.0.0.1",
+      port: 3000,
+      servedir: outputDir,
+    });
+
+    console.log(
+      `Development server running at http://127.0.0.1:3000`
+    );
+    
+  } else if (isWatchMode) {
     const ctx = await esbuild.context(options);
 
     await ctx.watch();

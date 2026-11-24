@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
+    "dev": "tsx scripts/build.ts --serve",
     "build": "tsx scripts/build.ts",
     "build:watch": "tsx scripts/build.ts --watch"
   },

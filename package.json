@@ -6,6 +6,7 @@
     "apps/*"
   ],
   "scripts": {
+    "dev": "npm run dev -w forager-web-app",
     "build": "npm run build -w forager-web-app",
     "start": "npm run build:watch -w forager-web-app"
   },
