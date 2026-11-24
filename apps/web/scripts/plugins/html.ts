@@ -54,27 +54,35 @@ export function htmlPlugin({
           .map(([file]) => path.basename(file));
 
         const stylesheets = cssFiles
-          .map((file) => `<link rel="stylesheet" href="./${file}" />`)
+          .map((file) => `<link rel="stylesheet" href="/${file}" />`)
           .join("\n    ");
 
-        const scripts = jsFiles
-          .map((file) => `<script type="module" src="./${file}"></script>`)
+          const scripts = jsFiles
+          .map((file) => `<script type="module" src="/${file}"></script>`)
           .join("\n    ");
 
-        const liveReloadScript = liveReload
-          ? `
-            <script>
-              const protocol = location.protocol === "https:" ? "wss:" : "ws:";
-              const socket = new WebSocket(\`\${protocol}//\${location.host}\`);
-
-              socket.addEventListener("message", (event) => {
-                if (event.data === "reload") {
-                  location.reload();
-                }
-              });
-            </script>
-          `
-          : "";
+          const liveReloadScript = liveReload
+            ? `<script>
+                (() => {
+                  const url =
+                    (location.protocol === "https:" ? "wss:" : "ws:") +
+                    "//" + location.host + "/__reload";
+                  let wasConnected = false;
+                  const connect = () => {
+                    const socket = new WebSocket(url);
+                    socket.addEventListener("open", () => {
+                      if (wasConnected) location.reload(); // dev server restarted
+                      wasConnected = true;
+                    });
+                    socket.addEventListener("message", (e) => {
+                      if (e.data === "reload") location.reload();
+                    });
+                    socket.addEventListener("close", () => setTimeout(connect, 1000));
+                  };
+                  connect();
+                })();
+              </script>`
+            : "";
 
         html = html.replace(
           "</head>",
