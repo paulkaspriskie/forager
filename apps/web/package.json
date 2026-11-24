@@ -17,11 +17,13 @@
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
+    "@types/ws": "^8.18.2",
     "autoprefixer": "^10.7.0",
     "esbuild": "^0.28.2",
     "postcss": "^8.5.33",
     "postcss-nesting": "^14.0.3",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "ws": "^8.23.0"
   }
 }

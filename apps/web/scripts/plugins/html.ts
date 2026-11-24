@@ -1,4 +1,3 @@
-
 import type { Plugin } from "esbuild";
 import path from "node:path";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
@@ -6,11 +5,15 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 interface HtmlPluginOptions {
   template: string;
   filename?: string;
+  onGenerated?: () => void;
+  liveReload?: boolean;
 }
 
 export function htmlPlugin({
   template,
   filename = "index.html",
+  onGenerated,
+  liveReload = false,
 }: HtmlPluginOptions): Plugin {
   return {
     name: "html",
@@ -34,6 +37,12 @@ export function htmlPlugin({
 
         let html = await readFile(templatePath, "utf8");
 
+        if (!html.includes("</head>") || !html.includes("</body>")) {
+          throw new Error(
+            "HTML template must contain </head> and </body>."
+          );
+        }
+
         const outputs = Object.entries(result.metafile.outputs);
 
         const jsFiles = outputs
@@ -52,6 +61,21 @@ export function htmlPlugin({
           .map((file) => `<script type="module" src="./${file}"></script>`)
           .join("\n    ");
 
+        const liveReloadScript = liveReload
+          ? `
+            <script>
+              const protocol = location.protocol === "https:" ? "wss:" : "ws:";
+              const socket = new WebSocket(\`\${protocol}//\${location.host}\`);
+
+              socket.addEventListener("message", (event) => {
+                if (event.data === "reload") {
+                  location.reload();
+                }
+              });
+            </script>
+          `
+          : "";
+
         html = html.replace(
           "</head>",
           `    ${stylesheets}\n  </head>`
@@ -59,7 +83,7 @@ export function htmlPlugin({
 
         html = html.replace(
           "</body>",
-          `    ${scripts}\n  </body>`
+          `    ${scripts}\n    ${liveReloadScript}\n  </body>`
         );
 
         await mkdir(outputDir, { recursive: true });
@@ -69,6 +93,8 @@ export function htmlPlugin({
           html,
           "utf8"
         );
+
+        onGenerated?.();
       });
     },
   };
