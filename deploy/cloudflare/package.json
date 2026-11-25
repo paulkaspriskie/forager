@@ -1,0 +1,14 @@
+{
+  "name": "cloudflare-deploy",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261125.1",
+    "wrangler": "^4.168.0"
+  }
+}
