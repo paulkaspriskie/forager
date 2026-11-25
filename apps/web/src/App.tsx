@@ -38,7 +38,7 @@ export default function App() {
         data.map((item, index) => (
           <div key={index}>
             <p>P/E Ratio: {item.priceToEarningsRatio}</p>
-            <p>ROE: {item.returnOnEquity}</p>
+            <p>D/E Ratio: {item.debtToEquityRatio}</p>
           </div>
         ))}
     </main>
