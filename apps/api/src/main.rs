@@ -116,8 +116,9 @@ async fn main() -> anyhow::Result<()> {
 
     let app = routes::api().with_state(state).layer(TraceLayer::new_for_http());
 
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3001").await?;
-    tracing::info!("listening on http://127.0.0.1:3001");
+    let addr = std::env::var("BIND_ADDR").unwrap_or_else(|_| "127.0.0.1:3001".into());
+    let listener = tokio::net::TcpListener::bind(&addr).await?;
+    tracing::info!("listening on http://{addr}");
     axum::serve(listener, app).await?;
     Ok(())
 }
