@@ -7,7 +7,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:3000/api/fundamentals/AAPL/ratios")
+    fetch("/api/fundamentals/AAPL/ratios")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error: ${response.status}`);

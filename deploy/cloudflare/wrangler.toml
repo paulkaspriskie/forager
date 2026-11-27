@@ -10,6 +10,10 @@ scheduling_policy = "durable_object"
 dockerfile = "../../apps/api/Dockerfile"
 build_context = "../.."
 
+[[routes]]
+pattern = "truffleresearch.com/api/*"
+zone_name = "truffleresearch.com"
+
 [[durable_objects.bindings]]
 name = "FORAGER_API"
 class_name = "ForagerApi"
