@@ -6,7 +6,7 @@ compatibility_date = "2026-11-25"
 class_name = "ForagerApi"
 scheduling_policy = "durable_object"
 
-[containers.images.api]
+[containers.images.base]
 dockerfile = "../../apps/api/Dockerfile"
 build_context = "../.."
 

@@ -40,7 +40,7 @@ export class ForagerApi extends DurableObject<Env> {
   
     if (!container.running) {
       await container.start({
-        image: container.images.api,
+        image: container.images.base,
         instance: "lite",
         enableInternet: true,
         env: {
