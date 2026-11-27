@@ -10,7 +10,6 @@
     "build": "npm run build -w forager-web-app",
     "start": "concurrently -k -n API,WEB \"cargo run --manifest-path ./Cargo.toml\" \"npm run dev --prefix apps/web\"",
     "watch": "npm run build:watch -w forager-web-app"
-
   },
   "repository": {
     "type": "git",
@@ -23,6 +22,7 @@
   },
   "homepage": "https://github.com/paulkaspriskie/forager#readme",
   "devDependencies": {
-    "concurrently": "^10.0.7"
+    "concurrently": "^10.0.7",
+    "wrangler": "^4.169.0"
   }
 }
